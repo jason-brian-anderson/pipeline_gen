@@ -1,0 +1,30 @@
+
+{
+	"name": "development_container",
+
+	"mounts": [
+		"source=D:\\mnt,target=/mnt,type=bind,consistency=cached"
+	  ],
+
+	"build": {
+		"context": "..",
+		"dockerfile": "Dockerfile"
+	},
+
+	"runArgs": [
+		//"--runtime=nvidia",  # does not seem to be needed?
+		"--gpus",
+		"all",
+	],
+
+	"extensions": [
+		"ms-azuretools.vscode-docker",
+		"GitHub.copilot",
+		"eamodio.gitlens",
+		"GitHub.vscode-pull-request-github"
+
+	],
+
+	"postCreateCommand": "./start_jupyter.sh"
+
+}
