@@ -1,6 +1,3 @@
-pandas
-numpy
-matplotlib
-jupyter
 apache-airflow-providers-docker
 docker
+jupyter
