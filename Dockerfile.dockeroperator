@@ -1,0 +1,5 @@
+FROM pytorch/pytorch
+USER root
+
+#ADD requirements.txt . 
+#RUN pip install -r dockeroperator_requirements.txt

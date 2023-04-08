@@ -20,9 +20,11 @@ dag = DAG(
 )
 gpu_task = DockerOperator(
     task_id='gpu_task',
+    
     #image='pytorch/pytorch',
     image="nvidia/cuda:11.4.0-cudnn8-runtime-ubuntu20.04",
     command="nvidia-smi",
+    #command='python -c "import torch; print(torch.cuda.is_available())"'
     device_requests=[
     docker.types.DeviceRequest(count=-1, capabilities=[['gpu']])
 ],

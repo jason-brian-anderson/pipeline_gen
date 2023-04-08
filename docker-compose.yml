@@ -79,7 +79,8 @@ x-airflow-common:
     - ${AIRFLOW_PROJ_DIR:-.}/logs:/opt/airflow/logs
     - ${AIRFLOW_PROJ_DIR:-.}/plugins:/opt/airflow/plugins
 
-  user: "${AIRFLOW_UID:-50000}:0"
+  #user: "${AIRFLOW_UID:-0}:${AIRFLOW_GID:-0}"
+  user: '0:0'
   depends_on:
     &airflow-common-depends-on
     redis:
@@ -298,20 +299,20 @@ services:
       airflow-init:
         condition: service_completed_successfully
 
-  airflow-jupyter:
-    <<: *airflow-common
-    #image: ${AIRFLOW_IMAGE_NAME:-apache/airflow:2.5.3}
-    #image: <CUSTOM_IMAGE_DESCRIBED_ABOVE>
+  # airflow-jupyter:
+  #   <<: *airflow-common
+  #   #image: ${AIRFLOW_IMAGE_NAME:-apache/airflow:2.5.3}
+  #   #image: <CUSTOM_IMAGE_DESCRIBED_ABOVE>
 
-    container_name: airflow_jupyter
-    command: bash -cx "jupyter notebook --ip 0.0.0.0  --NotebookApp.token='airflow' --no-browser"
-    ports:
-      - 8888:8888
-    restart: always
-    depends_on:
-      <<: *airflow-common-depends-on
-      airflow-init:
-        condition: service_completed_successfully
+  #   container_name: airflow_jupyter
+  #   command: bash -cx "jupyter notebook --ip 0.0.0.0  --NotebookApp.token='airflow' --no-browser"
+  #   ports:
+  #     - 8888:8888
+  #   restart: always
+  #   depends_on:
+  #     <<: *airflow-common-depends-on
+  #     airflow-init:
+  #       condition: service_completed_successfully
 
 
 volumes:
