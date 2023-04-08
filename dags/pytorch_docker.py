@@ -25,7 +25,7 @@ dag = DAG(
 
 # Replace "my_dockerfile_directory" with the path to your Dockerfile directory
 #docker_build_command = f"docker build -t my_pytorch:latest {os.path.abspath('.')}"
-docker_build_command = f"docker build -f Dockerfile.dockeroperator ."
+#docker_build_command = f"docker build -f Dockerfile.dockeroperator ."
 
 
 
@@ -35,7 +35,8 @@ docker_build_command = f"docker build -f Dockerfile.dockeroperator ."
 #     dag=dag,
 # )
 
-host_path = '//c/Users/kraut/Documents/My_Code/development_template_with_airflow/scripts'
+host_path = '/c/Users/kraut/Documents/My_Code/development_template_with_airflow/scripts'
+#host_path = 'bullshit'
 container_path = '/tmp/scripts'
 
 pytorch_task = DockerOperator(
@@ -49,7 +50,7 @@ pytorch_task = DockerOperator(
     #command='/bin/bash -c "python your_pytorch_script.py"',  # Replace with your PyTorch script
     #command='date',
     #command='/opt/conda/bin/python /tmp/scripts/run_this.py ',
-    command = '/bin/bash -c "date;id;date;date;ls -latrs /tmp/scripts" ',
+    command = f'/bin/bash -c "date;id;date;date;cd ~; echo xxxxxxxxxxxxxxxxxxxxxx;ls -latrs {container_path}" ',
     
     mounts=[
         Mount(source=host_path, 
@@ -58,12 +59,14 @@ pytorch_task = DockerOperator(
               ),
     ],
     auto_remove=True,
-    user='root',
-    privileged =True,
-
-    working_dir="/tmp/scripts",
-    mount_tmp_dir=False 
-    ,
+    user='1000:0',
+    privileged = True,
+    docker_url='unix://var/run/docker.sock',
+    #docker_url = 'var/run/docker.sock',
+    #docker_url = 'tcp://localhost:2376',
+    #working_dir="/tmp/",
+    mount_tmp_dir=False, 
+    
     device_requests=[
     docker.types.DeviceRequest(count=-1, capabilities=[['gpu']]),
     ],
