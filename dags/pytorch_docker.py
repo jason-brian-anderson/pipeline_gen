@@ -36,7 +36,6 @@ dag = DAG(
 # )
 
 host_path = '/c/Users/kraut/Documents/My_Code/development_template_with_airflow/scripts'
-#host_path = 'bullshit'
 container_path = '/tmp/scripts'
 
 pytorch_task = DockerOperator(
@@ -45,12 +44,10 @@ pytorch_task = DockerOperator(
     container_name = 'trainer',
 
     image='pytorch/pytorch',
+    #image="nvidia/cuda:11.4.0-cudnn8-runtime-ubuntu20.04",
     #image='my_pytorch',
 
-    #command='/bin/bash -c "python your_pytorch_script.py"',  # Replace with your PyTorch script
-    #command='date',
-    #command='/opt/conda/bin/python /tmp/scripts/run_this.py ',
-    command = f'/bin/bash -c "date;id;date;date;cd ~; echo xxxxxxxxxxxxxxxxxxxxxx;ls -latrs {container_path}" ',
+    command = f'/bin/bash -c "date;id;date;date;cd ~; echo xxxxxxxxxxxxxxxxxxxxxx;nvidia-smi;ls -latrs {container_path}" ',
     
     mounts=[
         Mount(source=host_path, 
@@ -59,12 +56,9 @@ pytorch_task = DockerOperator(
               ),
     ],
     auto_remove=True,
-    user='1000:0',
+    user='root',
     privileged = True,
     docker_url='unix://var/run/docker.sock',
-    #docker_url = 'var/run/docker.sock',
-    #docker_url = 'tcp://localhost:2376',
-    #working_dir="/tmp/",
     mount_tmp_dir=False, 
     
     device_requests=[
