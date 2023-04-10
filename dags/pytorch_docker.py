@@ -19,7 +19,7 @@ dag = DAG(
     'pytorch_docker_dag',
     default_args=default_args,
     description='PyTorch container with DockerOperator',
-    schedule_interval=timedelta(days=1),
+    schedule_interval=timedelta(minutes=5),
     catchup=False,
 )
 
@@ -36,6 +36,7 @@ dag = DAG(
 # )
 
 host_path = '/c/Users/kraut/Documents/My_Code/development_template_with_airflow/scripts'
+#host_path = '/d/scripts'
 container_path = '/tmp/scripts'
 
 pytorch_task = DockerOperator(
@@ -47,7 +48,7 @@ pytorch_task = DockerOperator(
     #image="nvidia/cuda:11.4.0-cudnn8-runtime-ubuntu20.04",
     #image='my_pytorch',
 
-    command = f'/bin/bash -c "date;id;date;date;cd ~; echo xxxxxxxxxxxxxxxxxxxxxx;nvidia-smi;ls -latrs {container_path}" ',
+    command = f'/bin/bash -c "date;id;date;date;cd ~; echo xxxxxxxxxxxxxxxxxxxxxx;nvidia-smi;ls -latrs {container_path}; python {container_path}/run_this.py" ',
     
     mounts=[
         Mount(source=host_path, 

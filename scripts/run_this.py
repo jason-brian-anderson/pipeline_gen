@@ -1,3 +1,3 @@
 import  torch
 
-print("THIS::::",torch.cuda.is_available())
+print("CUDA IS AVAILABLE???::::",torch.cuda.is_available())
