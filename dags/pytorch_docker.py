@@ -2,6 +2,7 @@ from datetime import timedelta
 from airflow import DAG
 from airflow.providers.docker.operators.docker import DockerOperator
 from airflow.operators.bash import BashOperator
+from airflow.operators.dummy import DummyOperator
 from airflow.utils.dates import days_ago
 import docker
 from docker.types import Mount
@@ -15,6 +16,9 @@ default_args = {
     'start_date': days_ago(1),
 }
 
+
+
+
 dag = DAG(
     'pytorch_docker_dag',
     default_args=default_args,
@@ -23,17 +27,28 @@ dag = DAG(
     catchup=False,
 )
 
-# Replace "my_dockerfile_directory" with the path to your Dockerfile directory
-#docker_build_command = f"docker build -t my_pytorch:latest {os.path.abspath('.')}"
-#docker_build_command = f"docker build -f Dockerfile.dockeroperator ."
+
+
+start = DummyOperator(
+    task_id='start_pipeline',
+    dag=dag,
+)
+
+stop = DummyOperator(
+    task_id='stpp_pipeline',
+    dag=dag,
+)
 
 
 
-# build_docker_image = BashOperator(
-#     task_id='build_docker_image',
-#     bash_command=docker_build_command,
-#     dag=dag,
-# )
+image = "dockeroperator_deploy_image:latest"
+dockerfile_dir = "/opt/airflow/dags/pytorch_pipeline"
+
+pytorch_build = BashOperator(
+    task_id='build_docker_image',
+    bash_command=f'docker build -t {image} {dockerfile_dir}',
+    dag=dag,
+)
 
 host_path = '/c/Users/kraut/Documents/My_Code/development_template_with_airflow/scripts'
 #host_path = '/d/scripts'
@@ -44,7 +59,7 @@ pytorch_task = DockerOperator(
     api_version='auto',
     container_name = 'trainer',
 
-    image='pytorch/pytorch',
+    image=image,
     #image="nvidia/cuda:11.4.0-cudnn8-runtime-ubuntu20.04",
     #image='my_pytorch',
 
@@ -70,3 +85,4 @@ pytorch_task = DockerOperator(
     dag=dag,
 )
 #build_docker_image >> pytorch_task
+start >> pytorch_build >> pytorch_task >> stop
