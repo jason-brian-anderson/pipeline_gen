@@ -60,9 +60,7 @@ pytorch_task = DockerOperator(
     user='root',
     privileged = True,
     docker_url='unix://var/run/docker.sock',
-    mount_tmp_dir=False, 
-    device_requests=[
-    docker.types.DeviceRequest(count=-1, capabilities=[['gpu']]),],
+    device_requests=[docker.types.DeviceRequest(count=-1, capabilities=[['gpu']]),],
     network_mode='bridge',
     dag=dag,
 )
