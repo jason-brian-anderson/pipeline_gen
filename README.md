@@ -1,12 +1,12 @@
-# Project Name: Pipefitter
+# Project Name: Gasfitter
 
 ## Overview
 
-Pipefitter is a comprehensive and easy-to-use framework for orchestrated batch data processing, designed to facilitate rapid development of machine learning models as pipelines from the start. The framework combines several powerful data processing tools, such as Airflow, PyTorch, MLOps, Jupyter, and VSCode integration, in an orchestrated environment that follows Uncle Bob's approach to data development: "Go slow to go fast." Pipefitter comes with developer-specific tools, like linters and Black, to streamline development, as well as simple access to the underlying container environment via a well-documented and straightforward Docker Compose implementation.
+Gasfitter is a comprehensive and easy-to-use framework for orchestrated batch data processing, designed to facilitate rapid development of machine learning models as pipelines from the start. The framework combines several powerful data processing tools, such as Airflow, PyTorch, MLOps, Jupyter, and VSCode integration, in an orchestrated environment that follows Uncle Bob's approach to data development: "Go slow to go fast." Gasfitter comes with developer-specific tools, like linters and Black, to streamline development, as well as simple access to the underlying container environment via a well-documented and straightforward Docker Compose implementation.
 
-![Pipefitter Overview](images/overview.png)
+![Gasfitter Overview](images/overview.png)
 
-*Include an overview image that showcases the architecture and components of Pipefitter, highlighting the tools and their interactions in the orchestrated environment.*
+*Include an overview image that showcases the architecture and components of Gasfitter, highlighting the tools and their interactions in the orchestrated environment.*
 
 ## Features
 
@@ -21,10 +21,10 @@ Pipefitter is a comprehensive and easy-to-use framework for orchestrated batch d
 
 1. **Prerequisites**: Ensure you have Docker and Docker Compose installed on your system. If not, follow the installation guides for [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/).
 
-2. **Clone the repository**: Clone the Pipefitter repository to your local machine.
+2. **Clone the repository**: Clone the Gasfitter repository to your local machine.
 
    ```
-   git clone https://github.com/your_username/Pipefitter.git
+   git clone https://github.com/your_username/Gasfitter.git
    ```
 
 3. **Build and run the Docker Compose environment**: Navigate to the project directory and run the following command:
@@ -41,7 +41,7 @@ Pipefitter is a comprehensive and easy-to-use framework for orchestrated batch d
 
 ## Documentation
 
-Detailed documentation for Pipefitter can be found in the `docs/` directory, including guides on how to:
+Detailed documentation for Gasfitter can be found in the `docs/` directory, including guides on how to:
 
 - Configure and customize the framework for your specific needs
 - Develop, test, and deploy machine learning models using the integrated tools
@@ -50,14 +50,14 @@ Detailed documentation for Pipefitter can be found in the `docs/` directory, inc
 
 ## Contributing
 
-We welcome contributions to Pipefitter! To get involved, please read our [CONTRIBUTING.md](CONTRIBUTING.md) file for guidelines on submitting issues, proposing enhancements, and contributing code.
+We welcome contributions to Gasfitter! To get involved, please read our [CONTRIBUTING.md](CONTRIBUTING.md) file for guidelines on submitting issues, proposing enhancements, and contributing code.
 
 ## License
 
-Pipefitter is released under the [MIT License](LICENSE).
+Gasfitter is released under the [MIT License](LICENSE).
 
 ## Contact
 
-For any questions, feedback, or support requests, please reach out to us at [jason.anderson.professional@gmail.com](mailto:jason.anderson.professional@gmail.com) or join our [community forum](https://community.example.com/Pipefitter).
+For any questions, feedback, or support requests, please reach out to us at [jason.anderson.professional@gmail.com](mailto:jason.anderson.professional@gmail.com) or join our [community forum](https://community.example.com/Gasfitter).
 
 ![Contact & Support](images/contact_support.png)
