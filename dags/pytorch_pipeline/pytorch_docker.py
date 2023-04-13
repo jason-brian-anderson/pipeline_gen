@@ -100,10 +100,10 @@ stop = DummyOperator(
 #     network_mode='bridge',
 #     dag=dag,
 # )
-pytorch_task = pipeline_operator(
-        task_id='verify_cuda',
-        container_name = 'trainer',
-        command = f"python {config['container_path']}/{config['training_executable']}",
+cuda_test = pipeline_operator(
+        task_id='cuda_test',
+        container_name = 'cuda_test',
+        command = f"python {config['container_path']}/{config['cuda_test']}",
 )
 #start >> pytorch_build >> pytorch_task >> stop
-start >>  pytorch_task >> stop
+start >>  cuda_test >> stop

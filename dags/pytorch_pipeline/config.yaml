@@ -2,4 +2,5 @@ pipeline_image: dockeroperator_deploy_image:latest
 #dockerfile_dir: /opt/airflow/dags/pytorch_pipeline
 host_path: /c/Users/kraut/Documents/My_Code/development_template_with_airflow/dags/pytorch_pipeline/scripts
 container_path: /tmp/scripts
-training_executable: cuda_test.py
+cuda_test: cuda_test.py
+harvest_data: harvest_data.py
