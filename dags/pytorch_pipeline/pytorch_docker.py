@@ -22,6 +22,31 @@ config_file = "/opt/airflow/dags/pytorch_pipeline/config.yaml"
 with open(config_file, "r") as f:
     config = yaml.load(f, Loader=yaml.FullLoader)
 
+
+
+def pipeline_operator(task_id, container_name, command,):
+
+    return DockerOperator(
+    task_id=task_id,
+    api_version='auto',
+    container_name = container_name,
+    image=config['pipeline_image'],
+    command = command,
+    mounts=[
+        Mount(source=config['host_path'], 
+              target=config['container_path'], 
+              type="bind",
+              ),
+            ],
+    auto_remove=True,
+    user='root',
+    privileged = True,
+    docker_url='unix://var/run/docker.sock',
+    device_requests=[docker.types.DeviceRequest(count=-1, capabilities=[['gpu']]),],
+    network_mode='bridge',
+    dag=dag,
+)
+
 default_args = {
     'owner': 'airflow',
     'retries': 1,
@@ -55,25 +80,30 @@ stop = DummyOperator(
 #     dag=dag,
 # )
 
-pytorch_task = DockerOperator(
-    task_id='verify_cuda',
-    api_version='auto',
-    container_name = 'trainer',
-    image=config['pipeline_image'],
-    command = f"python {config['container_path']}/{config['training_executable']}",
-    mounts=[
-        Mount(source=config['host_path'], 
-              target=config['container_path'], 
-              type="bind",
-              ),
-            ],
-    auto_remove=True,
-    user='root',
-    privileged = True,
-    docker_url='unix://var/run/docker.sock',
-    device_requests=[docker.types.DeviceRequest(count=-1, capabilities=[['gpu']]),],
-    network_mode='bridge',
-    dag=dag,
+# pytorch_task = DockerOperator(
+#     task_id='verify_cuda',
+#     api_version='auto',
+#     container_name = 'trainer',
+#     image=config['pipeline_image'],
+#     command = f"python {config['container_path']}/{config['training_executable']}",
+#     mounts=[
+#         Mount(source=config['host_path'], 
+#               target=config['container_path'], 
+#               type="bind",
+#               ),
+#             ],
+#     auto_remove=True,
+#     user='root',
+#     privileged = True,
+#     docker_url='unix://var/run/docker.sock',
+#     device_requests=[docker.types.DeviceRequest(count=-1, capabilities=[['gpu']]),],
+#     network_mode='bridge',
+#     dag=dag,
+# )
+pytorch_task = pipeline_operator(
+        task_id='verify_cuda',
+        container_name = 'trainer',
+        command = f"python {config['container_path']}/{config['training_executable']}",
 )
 #start >> pytorch_build >> pytorch_task >> stop
 start >>  pytorch_task >> stop
