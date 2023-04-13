@@ -8,6 +8,16 @@ import docker
 from docker.types import Mount
 import yaml
 
+'''
+to do:
+1. turn off docker build task
+2. ensure can run with pre-existing dockeroperator_deploy_image:latest
+3. be able to build that form command line
+4. move and rename Dockeroperators to root dir
+
+'''
+
+
 config_file = "/opt/airflow/dags/pytorch_pipeline/config.yaml"
 with open(config_file, "r") as f:
     config = yaml.load(f, Loader=yaml.FullLoader)
@@ -38,11 +48,11 @@ stop = DummyOperator(
     dag=dag,
 )
 
-pytorch_build = BashOperator(
-    task_id='build_docker_image_for_training',
-    bash_command=f"docker build -t {config['training_image']} {config['dockerfile_dir']}",
-    dag=dag,
-)
+# pytorch_build = BashOperator(
+#     task_id='build_docker_image_for_training',
+#     bash_command=f"docker build -t {config['training_image']} {config['dockerfile_dir']}",
+#     dag=dag,
+# )
 
 pytorch_task = DockerOperator(
     task_id='run_pytorch_training_from_docker',
@@ -64,4 +74,5 @@ pytorch_task = DockerOperator(
     network_mode='bridge',
     dag=dag,
 )
-start >> pytorch_build >> pytorch_task >> stop
+#start >> pytorch_build >> pytorch_task >> stop
+start >>  pytorch_task >> stop
