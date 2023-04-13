@@ -58,8 +58,6 @@ Pipefitter is released under the [MIT License](LICENSE).
 
 ## Contact
 
-For any questions, feedback, or support requests, please reach out to us at [orchestrate_ml@example.com](mailto:orchestrate_ml@example.com) or join our [community forum](https://community.example.com/Pipefitter).
+For any questions, feedback, or support requests, please reach out to us at [jason.anderson.professional@gmail.com](mailto:jason.anderson.professional@gmail.com) or join our [community forum](https://community.example.com/Pipefitter).
 
 ![Contact & Support](images/contact_support.png)
-
-*Include a "Contact & Support" image that represents collaboration, communication, or a community of developers.*
