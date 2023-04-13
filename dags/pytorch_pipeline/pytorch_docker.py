@@ -48,6 +48,7 @@ stop = DummyOperator(
     dag=dag,
 )
 
+
 # pytorch_build = BashOperator(
 #     task_id='build_docker_image_for_training',
 #     bash_command=f"docker build -t {config['training_image']} {config['dockerfile_dir']}",
@@ -55,7 +56,7 @@ stop = DummyOperator(
 # )
 
 pytorch_task = DockerOperator(
-    task_id='run_pytorch_training_from_docker',
+    task_id='verify_cuda',
     api_version='auto',
     container_name = 'trainer',
     image=config['pipeline_image'],
