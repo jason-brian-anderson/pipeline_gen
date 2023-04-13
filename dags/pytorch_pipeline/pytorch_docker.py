@@ -125,5 +125,11 @@ train_model = pipeline_operator(
         command = f"python {config['container_path']}/{config['train_model']}",
 )
 
+deploy_model = pipeline_operator(
+        task_id='deploy_model',
+        container_name = 'deploy_model',
+        command = f"python {config['container_path']}/{config['deploy_model']}",
+)
+
 #start >> pytorch_build >> pytorch_task >> stop
-start >>  cuda_test >> harvest_data >> transform_data >> train_model >> stop
+start >>  cuda_test >> harvest_data >> transform_data >> train_model >> deploy_model >> stop

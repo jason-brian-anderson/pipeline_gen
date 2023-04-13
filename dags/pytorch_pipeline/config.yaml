@@ -6,3 +6,4 @@ cuda_test: cuda_test.py
 harvest_data: harvest_data.py
 transform_data: transform_data.py
 train_model: train_model.py
+deploy_model: deploy_model.py
