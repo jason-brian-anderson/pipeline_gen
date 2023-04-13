@@ -4,3 +4,5 @@ host_path: /c/Users/kraut/Documents/My_Code/development_template_with_airflow/da
 container_path: /tmp/scripts
 cuda_test: cuda_test.py
 harvest_data: harvest_data.py
+transform_data: transform_data.py
+train_model: train_model.py

@@ -105,5 +105,25 @@ cuda_test = pipeline_operator(
         container_name = 'cuda_test',
         command = f"python {config['container_path']}/{config['cuda_test']}",
 )
+
+
+harvest_data = pipeline_operator(
+        task_id='harvest_data',
+        container_name = 'harvest_data',
+        command = f"python {config['container_path']}/{config['harvest_data']}",
+)
+
+transform_data = pipeline_operator(
+        task_id='transform_data',
+        container_name = 'transform_data',
+        command = f"python {config['container_path']}/{config['transform_data']}",
+)
+
+train_model = pipeline_operator(
+        task_id='train_model',
+        container_name = 'train_model',
+        command = f"python {config['container_path']}/{config['train_model']}",
+)
+
 #start >> pytorch_build >> pytorch_task >> stop
-start >>  cuda_test >> stop
+start >>  cuda_test >> harvest_data >> transform_data >> train_model >> stop
