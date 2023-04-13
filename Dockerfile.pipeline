@@ -1,0 +1,10 @@
+FROM pytorch/pytorch
+
+
+RUN apt-get update && \
+    apt-get upgrade -y
+
+
+
+ADD requirements_for_pipeline.txt . 
+RUN pip install -r requirements_for_pipeline.txt
