@@ -305,5 +305,27 @@ services:
       airflow-init:
         condition: service_completed_successfully
 
+  airflow-jupyter:
+    <<: *airflow-common
+    image: dockeroperator_deploy_image
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    user: root
+    container_name: dockeroperator_deploy_image
+    command: bash -cx "jupyter notebook --ip 0.0.0.0  --NotebookApp.token='airflow' --no-browser --allow-root"
+    ports:
+      - "8888:8888"
+    restart: always
+    depends_on:
+      <<: *airflow-common-depends-on
+      airflow-init:
+        condition: service_completed_successfully
+
+
 volumes:
   postgres-db-volume:
