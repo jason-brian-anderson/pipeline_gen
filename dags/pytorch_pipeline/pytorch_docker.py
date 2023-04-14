@@ -33,8 +33,12 @@ def pipeline_operator(task_id, container_name, command,):
     image=config['pipeline_image'],
     command = command,
     mounts=[
-        Mount(source=config['host_path'], 
-              target=config['container_path'], 
+        Mount(source=config['host_code_path'], 
+              target=config['container_code_path'], 
+              type="bind",
+              ),
+        Mount(source=config['host_data_path'], 
+              target=config['container_data_path'], 
               type="bind",
               ),
             ],
@@ -103,32 +107,32 @@ stop = DummyOperator(
 cuda_test = pipeline_operator(
         task_id='cuda_test',
         container_name = 'cuda_test',
-        command = f"python {config['container_path']}/{config['cuda_test']}",
+        command = f"python {config['container_code_path']}/{config['cuda_test']}",
 )
 
 
 harvest_data = pipeline_operator(
         task_id='harvest_data',
         container_name = 'harvest_data',
-        command = f"python {config['container_path']}/{config['harvest_data']}",
+        command = f"python {config['container_code_path']}/{config['harvest_data']}",
 )
 
 transform_data = pipeline_operator(
         task_id='transform_data',
         container_name = 'transform_data',
-        command = f"python {config['container_path']}/{config['transform_data']}",
+        command = f"python {config['container_code_path']}/{config['transform_data']}",
 )
 
 train_model = pipeline_operator(
         task_id='train_model',
         container_name = 'train_model',
-        command = f"python {config['container_path']}/{config['train_model']}",
+        command = f"python {config['container_code_path']}/{config['train_model']}",
 )
 
 deploy_model = pipeline_operator(
         task_id='deploy_model',
         container_name = 'deploy_model',
-        command = f"python {config['container_path']}/{config['deploy_model']}",
+        command = f"python {config['container_code_path']}/{config['deploy_model']}",
 )
 
 #start >> pytorch_build >> pytorch_task >> stop
