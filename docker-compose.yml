@@ -326,6 +326,7 @@ services:
       airflow-init:
         condition: service_completed_successfully
 
-
+    volumes:
+      - /e/mnt:/mnt/data
 volumes:
   postgres-db-volume:
