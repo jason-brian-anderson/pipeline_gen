@@ -1,34 +1,21 @@
-import os
+from datetime import timedelta
+from airflow import DAG
+from airflow.providers.docker.operators.docker import DockerOperator
+from airflow.operators.bash import BashOperator
+from airflow.operators.dummy import DummyOperator
+from airflow.utils.dates import days_ago
+import docker
+from docker.types import Mount
 import yaml
-    
 
 
-def get_config(config_file = "/tmp/config.yaml"):
+def get_config(config_file):
     with open(config_file, "r") as f:
         config = yaml.load(f, Loader=yaml.FullLoader)
     return config
 
-def _create_data_directory(mnt_dir, airflow_timestamp):
-    directory_name = os.path.join(mnt_dir,airflow_timestamp,)
-    if not os.path.exists(directory_name):
-        print(f"path {directory_name} does not exist, creating it")
-        os.makedirs(directory_name)
-    return directory_name
-
-def persist_data_to_disk(filename, data, airflow_timestamp):
-    config = get_config()
-    format = config['pandas_data_save_format']
-    directory_name = _create_data_directory(config['container_data_path'], airflow_timestamp)
-
-    if format == 'csv':
-            data_file = os.path.join(directory_name,filename)
-            data.to_csv(data_file,index = False)
-            print(f"wrote {data_file} to disk")
-    else:
-            raise "format not implemented"
-
-
-def xxxpipeline_operator(config, task_id, container_name, command, dag):
+def pipeline_operator(config_file, task_id, container_name, command, dag,):
+    config = get_config(config_file)
     return DockerOperator(
     task_id=task_id,
     api_version='auto',

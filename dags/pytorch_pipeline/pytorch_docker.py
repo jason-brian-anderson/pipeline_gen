@@ -1,63 +1,25 @@
 from datetime import timedelta
 from airflow import DAG
-from airflow.providers.docker.operators.docker import DockerOperator
-from airflow.operators.bash import BashOperator
 from airflow.operators.dummy import DummyOperator
 from airflow.utils.dates import days_ago
-import docker
-from docker.types import Mount
+import dag_utils as du
 
-import pytorch_pipeline.scripts.utils as utils
+config_file = "/opt/airflow/dags/pytorch_pipeline/config.yaml"
+config = du.get_config(config_file)
 
-
-
-config = utils.get_config()
-
-
-def pipeline_operator(task_id, container_name, command,):
-
-    return DockerOperator(
-    task_id=task_id,
-    api_version='auto',
-    container_name = container_name,
-    image=config['pipeline_image'],
-    command = command,
-    mounts=[
-        Mount(source=config['host_code_path'], 
-              target=config['container_code_path'], 
-              type="bind",
-              ),
-        Mount(source=config['host_data_path'], 
-              target=config['container_data_path'], 
-              type="bind",
-              ),
-        Mount(source=config['host_config_path'], 
-              target=config['container_config_path'], 
-              type="bind",
-              ),
-            ],
-    auto_remove=True,
-    user='root',
-    privileged = True,
-    docker_url='unix://var/run/docker.sock',
-    device_requests=[docker.types.DeviceRequest(count=-1, capabilities=[['gpu']]),],
-    network_mode='bridge',
-    dag=dag,
-)
 
 default_args = {
     'owner': 'airflow',
     'retries': 1,
     'retry_delay': timedelta(minutes=5),
     'start_date': days_ago(1),
-    
 }
 
 dag = DAG(
     'pytorch_training_pipeline',
     default_args=default_args,
     description='PyTorch container with DockerOperator',
-    schedule_interval=timedelta(minutes=5),
+    schedule_interval=timedelta(minutes=240),
     catchup=False,
 )
 
@@ -71,64 +33,44 @@ stop = DummyOperator(
     dag=dag,
 )
 
-
-# pytorch_build = BashOperator(
-#     task_id='build_docker_image_for_training',
-#     bash_command=f"docker build -t {config['training_image']} {config['dockerfile_dir']}",
-#     dag=dag,
-# )
-
-# pytorch_task = DockerOperator(
-#     task_id='verify_cuda',
-#     api_version='auto',
-#     container_name = 'trainer',
-#     image=config['pipeline_image'],
-#     command = f"python {config['container_path']}/{config['training_executable']}",
-#     mounts=[
-#         Mount(source=config['host_path'], 
-#               target=config['container_path'], 
-#               type="bind",
-#               ),
-#             ],
-#     auto_remove=True,
-#     user='root',
-#     privileged = True,
-#     docker_url='unix://var/run/docker.sock',
-#     device_requests=[docker.types.DeviceRequest(count=-1, capabilities=[['gpu']]),],
-#     network_mode='bridge',
-#     dag=dag,
-# )
-cuda_test = pipeline_operator(
+cuda_test = du.pipeline_operator(
+        config_file = config_file,
         task_id='cuda_test',
         container_name = 'cuda_test',
         command = f"python {config['container_code_path']}/{config['cuda_test']}",
-)
+        dag = dag,
+        )
 
-
-harvest_data = pipeline_operator(
+harvest_data = du.pipeline_operator(
+        config_file = config_file,
         task_id='harvest_data',
         container_name = 'harvest_data',
         command = f"python {config['container_code_path']}/{config['harvest_data']}  {{{{ ts }}}}",
-         
-)
+        dag = dag,
+        )
 
-transform_data = pipeline_operator(
+transform_data = du.pipeline_operator(
+        config_file = config_file,
         task_id='transform_data',
         container_name = 'transform_data',
         command = f"python {config['container_code_path']}/{config['transform_data']}",
-)
+        dag = dag,
+        )
 
-train_model = pipeline_operator(
+train_model = du.pipeline_operator(
+        config_file = config_file,
         task_id='train_model',
         container_name = 'train_model',
         command = f"python {config['container_code_path']}/{config['train_model']}",
-)
+        dag = dag,
+        )
 
-deploy_model = pipeline_operator(
+deploy_model = du.pipeline_operator(
+        config_file = config_file,
         task_id='deploy_model',
         container_name = 'deploy_model',
         command = f"python {config['container_code_path']}/{config['deploy_model']}",
-)
+        dag = dag,
+        )
 
-#start >> pytorch_build >> pytorch_task >> stop
 start >>  cuda_test >> harvest_data >> transform_data >> train_model >> deploy_model >> stop
