@@ -16,6 +16,12 @@ if not os.path.exists(directory_name):
     print('GOTTA MAKE THE PATH')
     os.makedirs(directory_name)
 
+data_file = os.path.join(directory_name,'some_good_data.csv')
+data.to_csv(data_file,index = False)
+
+new_data = pd.read_csv(data_file)
+print('the new data that was reloaded')
+print(new_data)
 
 
 print(f"I GOT THE DATE: {date}")
