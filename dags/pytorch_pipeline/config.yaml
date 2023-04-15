@@ -1,6 +1,8 @@
 pipeline_image: dockeroperator_deploy_image:latest
 #dockerfile_dir: /opt/airflow/dags/pytorch_pipeline
 host_code_path: /c/Users/kraut/Documents/My_Code/development_template_with_airflow/dags/pytorch_pipeline/scripts
+host_config_path: /c/Users/kraut/Documents/My_Code/development_template_with_airflow/dags/pytorch_pipeline/
+container_config_path: /tmp
 container_code_path: /tmp/scripts
 host_data_path: /e/mnt
 container_data_path: /mnt/data
@@ -9,3 +11,5 @@ harvest_data: harvest_data.py
 transform_data: transform_data.py
 train_model: train_model.py
 deploy_model: deploy_model.py
+raw_data_file: raw_harvested_data.csv
+pandas_data_save_format: csv

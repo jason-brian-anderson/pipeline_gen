@@ -2,7 +2,7 @@ import os
 import yaml
 
 
-def get_config(config_file):
+def get_config(config_file = "/opt/airflow/dags/pytorch_pipeline/config.yaml"):
     with open(config_file, "r") as f:
         config = yaml.load(f, Loader=yaml.FullLoader)
     return config

@@ -11,8 +11,7 @@ import pytorch_pipeline.scripts.utils as utils
 
 
 
-config_file = "/opt/airflow/dags/pytorch_pipeline/config.yaml"
-config = utils.get_config(config_file)
+config = utils.get_config()
 
 
 def pipeline_operator(task_id, container_name, command,):
@@ -30,6 +29,10 @@ def pipeline_operator(task_id, container_name, command,):
               ),
         Mount(source=config['host_data_path'], 
               target=config['container_data_path'], 
+              type="bind",
+              ),
+        Mount(source=config['host_config_path'], 
+              target=config['container_config_path'], 
               type="bind",
               ),
             ],
