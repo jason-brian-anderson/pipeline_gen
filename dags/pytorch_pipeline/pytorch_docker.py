@@ -6,22 +6,13 @@ from airflow.operators.dummy import DummyOperator
 from airflow.utils.dates import days_ago
 import docker
 from docker.types import Mount
-import yaml
 
-'''
-to do:
-1. turn off docker build task
-2. ensure can run with pre-existing dockeroperator_deploy_image:latest
-3. be able to build that form command line
-4. move and rename Dockeroperators to root dir
+import pytorch_pipeline.scripts.utils as utils
 
-'''
 
 
 config_file = "/opt/airflow/dags/pytorch_pipeline/config.yaml"
-with open(config_file, "r") as f:
-    config = yaml.load(f, Loader=yaml.FullLoader)
-
+config = utils.get_config(config_file)
 
 
 def pipeline_operator(task_id, container_name, command,):
