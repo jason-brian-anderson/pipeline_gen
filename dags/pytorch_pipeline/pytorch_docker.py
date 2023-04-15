@@ -114,7 +114,8 @@ cuda_test = pipeline_operator(
 harvest_data = pipeline_operator(
         task_id='harvest_data',
         container_name = 'harvest_data',
-        command = f"python {config['container_code_path']}/{config['harvest_data']}",
+        command = f"python {config['container_code_path']}/{config['harvest_data']}  {{{{ ts }}}}",
+         
 )
 
 transform_data = pipeline_operator(
