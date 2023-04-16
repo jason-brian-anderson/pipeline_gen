@@ -3,6 +3,8 @@ FROM apache/airflow:2.5.3
 ADD requirements_for_airflow.txt . 
 RUN pip install -r requirements_for_airflow.txt
 
+#COPY airflow.cfg /opt/airflow/airflow.cfg
+
 #USER root
 #RUN apt update && apt upgrade -y
 #USER AIRFLOW
