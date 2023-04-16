@@ -53,7 +53,7 @@ transform_data = du.pipeline_operator(
         config_file = config_file,
         task_id='transform_data',
         container_name = 'transform_data',
-        command = f"python {config['container_code_path']}/{config['transform_data']}",
+        command = f"python {config['container_code_path']}/{config['transform_data']}  {{{{ ts }}}}",
         dag = dag,
         )
 
@@ -61,7 +61,7 @@ train_model = du.pipeline_operator(
         config_file = config_file,
         task_id='train_model',
         container_name = 'train_model',
-        command = f"python {config['container_code_path']}/{config['train_model']}",
+        command = f"python {config['container_code_path']}/{config['train_model']}  {{{{ ts }}}}",
         dag = dag,
         )
 
@@ -69,7 +69,7 @@ deploy_model = du.pipeline_operator(
         config_file = config_file,
         task_id='deploy_model',
         container_name = 'deploy_model',
-        command = f"python {config['container_code_path']}/{config['deploy_model']}",
+        command = f"python {config['container_code_path']}/{config['deploy_model']}  {{{{ ts }}}}",
         dag = dag,
         )
 

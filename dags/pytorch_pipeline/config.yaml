@@ -11,4 +11,5 @@ transform_data: transform_data.py
 train_model: train_model.py
 deploy_model: deploy_model.py
 raw_data_file: raw_harvested_data.csv
+transformed_data_file: transformed_data.csv
 pandas_data_save_format: csv

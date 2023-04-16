@@ -1,3 +1,3 @@
 import  torch
-
-print('DEPLOY>>>>>>>>>>>>>>>>>>>>>>>>>>')
+#read model and deploy it to whereever
+print('deploy')
