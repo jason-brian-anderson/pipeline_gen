@@ -4,7 +4,7 @@
 [![Docker Image](https://img.shields.io/docker/cloud/build/yourusername/airflow-orchestration-environment)](https://hub.docker.com/r/yourusername/airflow-orchestration-environment)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-This GitHub project provides a template to quickly spin up a Docker containerized Airflow orchestration environment and offers an intuitive way to develop Python data pipelines from scratch. With this template, you can focus on building your pipelines without worrying about setting up the underlying infrastructure. Simply clone this repository and follow the instructions below to get started.
+This GitHub project provides a template to quickly spin up a Docker containerized Airflow orchestration environment and offers an intuitive way to develop Python data pipelines from scratch through pytorch model deploy. With this template, you can focus on building your pipelines without worrying about setting up the underlying infrastructure. Simply clone this repository and follow the instructions below to get started.
 
 ## Prerequisites
 
