@@ -10,7 +10,7 @@ Avoid the regret of building Jupyter notebooks that end up in production,  build
 * Ease the transition from exploratory data analysis to reliable model deployment and basic data pipeline orchestration
 * Ease the transition from basic data pipeline orchestartion to an enterprise-grade Airflow orchestration
 
-## General Idea
+## What's the point?
 This GitHub project is a Git repo template. Use it to quickly spin up  containerized Airflow orchestration environments. Use the Jupyter server to develop your code, then deploy that code in the files in the scripts directory where appropriate.
 
 ## Audience
