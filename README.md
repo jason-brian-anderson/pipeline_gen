@@ -6,6 +6,9 @@
 ## TLDR
 Avoid the regret of building Jupyter notebooks that end up in production,  build a simple data pipeline instead.
 
+
+![Example Dag](dag_example.JPG)
+
 ## Goals
 * Ease the transition from exploratory data analysis to reliable model deployment and basic data pipeline orchestration
 * Ease the transition from basic data pipeline orchestartion to an enterprise-grade Airflow orchestration
