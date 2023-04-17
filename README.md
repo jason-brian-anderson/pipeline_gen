@@ -25,6 +25,7 @@ Those who need a semi-reliable data pipeline quickly. This can run on a common W
 2. *Steer the user toward [good data pipelining practices](https://airflow.apache.org/docs/apache-airflow/stable/best-practices.html) such as atomicity and idemportency
 3. *Keep the orchestrator out of the way* Airflow is an extremely powerful and flexible tool, but it can be daunting to new users who haven't considered the data engineering implications of data science deployemnt.
  4. *Make code development easy with Jupyter* The application spins up a [local Jupyter Environment](http://localhost:8888/) powered by the pipeline
+ 5. *Get used to data engineering ops* Use the [local Airflow](http://localhost:8080) to deploy, monitor, and troubleshoot your pipeline
 
 ## Motivation
 It's not easy to extract, refine, and transform raw data into production ML models.  It's much worse to keep models updated as data evolves over time.  It is much easier to start with the pipeline orchestration in mind.  You don't want to be in a position of having to rerun a Jupyter notebook to refresh production ML models.
