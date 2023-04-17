@@ -1,17 +1,46 @@
-# Airflow Orchestration Environment Template
-
+# pipeline_gen
 [![Build Status](https://travis-ci.com/yourusername/airflow-orchestration-environment.svg?branch=main)](https://travis-ci.com/yourusername/airflow-orchestration-environment)
 [![Docker Image](https://img.shields.io/docker/cloud/build/yourusername/airflow-orchestration-environment)](https://hub.docker.com/r/yourusername/airflow-orchestration-environment)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-This GitHub project provides a template to quickly spin up a Docker containerized Airflow orchestration environment and offers an intuitive way to develop Python data pipelines from scratch through pytorch model deploy.
- 
-I wrote this because, at least to me, this wasn't immediately obvious upon initially learning about Airflow.  This build separates the airflow orchestration environment and that which does the actual data processing and training.  A `pipeline` image is built and configured for use with the DockerOperator to handle all processing, thus allowing a separation of duties between the orchestration and processing environment.  
+## TLDR
+Avoid the regret of building Jupter notebooks that end up in production,  build a simple data pipeline instead.
+
+## Goal
+Ease the transition from exploratory data analysis to reliable model deployment and data pipeline orchestration
+
+## Description
+This GitHub project is a Git repo template to quickly spin up a Docker containerized Airflow orchestration environment. This of it as an 'opinionated' data pipeline template. 
+
+## Getting Started
+1. Fork it and start your project from here.
+2. Install Docker and docker-compose
+3. runn 
+
+```
+docker-compose up
+```
+
+
+## Audience
+Those who need a semi-reliable data pipeline quickly.
+
+## Design Principles
+0. *Seprate the orchestration from the data processing* Airflow by default expects to run code on the Airflow python itself. It's better to perform all data processing on a docker image designed and built for that purpose.  Airflow's DockerOperator conveniently provides a great pairing of the orchestrator and the pipeline environment.
+1. *Customize Sparingly* Do not add what is not critical to a basic data pipeline.  The code should deviate as little as possible from the most basic implementation of airflow
+2. *Steer the user toward [good data pipelining practices](https://airflow.apache.org/docs/apache-airflow/stable/best-practices.html) such as atomicity and idemportency
+3. *Keep the orchestrator out of the way* Airflow is an extremely powerful and flexible tool, but it can be daunting to new users who haven't considered the data engineering implications of data science deployemnt.
+ 4. *Make code development easy with Jupyter* The application spins up a [local Jupyter Environment](http://localhost:8888/) powered by the pipeline
+
+## Motivation
+It's not easy to extract, refine, and transform raw data into production ML models.  It's much worse to keep models updated as data evolves over time.  It is much easier to start with the pipeline orchestration in mind.  You don't want to be in a position of having to rerun a Jupyter notebook to refresh production ML models.
 
 I'd love to know if you have a *better* way to train models with airflow that doesn't take this approach!
 
 
-With this template, you can focus on building your pipelines without worrying about setting up the underlying infrastructure. Simply clone this repository and follow the instructions below to get started.
+## What this project ** is not **
+Airflow has a world of capability that is not used in this project.  It can be deployed much more reliably than what is offered here. We're literally using a small fraction of it's capabilities with this project.  Importantly, this is *by design*. This project represents the step *between* a simple Jupyter EDA and a high availability, high throughput enterprise datapipeline.
+
 
 ## Prerequisites
 
