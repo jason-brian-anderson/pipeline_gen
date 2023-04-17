@@ -12,16 +12,6 @@ Ease the transition from exploratory data analysis to reliable model deployment 
 ## Description
 This GitHub project is a Git repo template to quickly spin up a Docker containerized Airflow orchestration environment. This of it as an 'opinionated' data pipeline template. 
 
-## Getting Started
-1. Fork it and start your project from here.
-2. Install Docker and docker-compose
-3. runn 
-
-```
-docker-compose up
-```
-
-
 ## Audience
 Those who need a semi-reliable data pipeline quickly.
 
