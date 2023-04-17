@@ -116,4 +116,4 @@ To update an existing pipeline, simply modify the corresponding Python script in
 
 ## Contributing
 
-We welcome contributions to improve this template. Please fork the repository, make your changes
+Want to add tooling that will help monitor and deploy models, such as Tensorboard, Weights and Biases, and maybe Prometheus and Grafana.  
