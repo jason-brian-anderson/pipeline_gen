@@ -14,7 +14,7 @@ Avoid the regret of building Jupyter notebooks that end up in production,  build
 This GitHub project is a Git repo template. Use it to quickly spin up  containerized Airflow orchestration environments. Use the Jupyter server to develop your code, then deploy that code in the files in the scripts directory where appropriate.
 
 ## Audience
-Those who need a semi-reliable data pipeline quickly.  You will need an NVidia GPU installed with appropriate drivers.  
+Those who need a semi-reliable data pipeline quickly. This can run on a common Windows 10 PC but you will need an NVidia GPU installed with appropriate drivers.  
 
 ## Design Principles
 0. *Seprate the orchestration from the data processing* Airflow by default expects to run code on the Airflow python itself. It's better to perform all data processing on a docker image designed and built for that purpose.  Airflow's DockerOperator conveniently provides a great pairing of the orchestrator and the pipeline environment.
