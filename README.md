@@ -4,10 +4,11 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 ## TLDR
-Avoid the regret of building Jupter notebooks that end up in production,  build a simple data pipeline instead.
+Avoid the regret of building Jupyter notebooks that end up in production,  build a simple data pipeline instead.
 
-## Goal
-Ease the transition from exploratory data analysis to reliable model deployment and data pipeline orchestration
+## Goals
+* Ease the transition from exploratory data analysis to reliable model deployment and basic data pipeline orchestration
+* Ease the transition from basic data pipeline orchestartion to an enterprise-grade Airflow orchestration
 
 ## Description
 This GitHub project is a Git repo template to quickly spin up a Docker containerized Airflow orchestration environment. This of it as an 'opinionated' data pipeline template. 
