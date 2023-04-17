@@ -118,6 +118,14 @@ To use this template, you'll need:
 
 To update an existing pipeline, simply modify the corresponding Python script in the `dags` folder and save your changes. Airflow will automatically update the pipeline in the web interface.
 
+### Updating the Application
+
+To modify the app (add packages, update port numbers, etc), simply make the changes (protip: make only 1 change at a time), then restart the app:
+
+```
+docker-compose down; ./clean_docker.sh ; ./build_pipeline_image.sh ; docker-compose up
+```
+
 ## Contributing
 
 Want to add tooling that will help monitor and deploy models, such as Tensorboard, Weights and Biases, and maybe Prometheus and Grafana.  
