@@ -4,7 +4,7 @@ from airflow.operators.dummy import DummyOperator
 from airflow.utils.dates import days_ago
 import dag_utils as du
 
-config_file = "/opt/airflow/dags/pytorch_pipeline/config.yaml"
+config_file = "/opt/airflow/dags/pipeline/config.yaml"
 config = du.get_config(config_file)
 
 

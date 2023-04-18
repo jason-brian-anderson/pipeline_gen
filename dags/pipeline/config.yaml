@@ -1,6 +1,6 @@
 #these require your customization
-host_code_path:   /c/Users/kraut/Documents/My_Code/development_template_with_airflow/dags/pytorch_pipeline/scripts
-host_config_path: /c/Users/kraut/Documents/My_Code/development_template_with_airflow/dags/pytorch_pipeline
+host_code_path:   /c/Users/kraut/Documents/My_Code/development_template_with_airflow/dags/pipeline/scripts
+host_config_path: /c/Users/kraut/Documents/My_Code/development_template_with_airflow/dags/pipeline
 host_data_path: /e/mnt
 
 # these shouldn't need customization
