@@ -18,10 +18,10 @@ It's easy to implement ideas in jupyter, but it's difficult to implement Jupyter
 
 ## Why Should You Care?
 Depends on who you are:
-* just starting out in Data Science? Do you want to make a good impression on Data Engineers during your technical interviews?  you set yourself apart by having at least breifly considered what the impacts of your future efforts may have on their weekends.
-* seasoned data scientist?:  Hopefully you're already developing your EDA and model code with pipelines in mind.  Pipeline_gen forces / guides  you  to develop code that can be more easily scaled up by the data engineering team.
-* seasoned data engineer? Pipeline_Gen shouldn't be the tool for your production pipelines, but if provided to your data scientists, it will guide them towards producing more deployable and scalable code, making your future self happier :)
-* full stack data scientist? (aka data scientist and data engineer) - you can productionalize this under limited situations, and maybe hold you off until your employer can hire a real data engineer. 
+* *just starting out in Data Science?* Do you want to make a good impression on Data Engineers during your technical interviews?  you set yourself apart by having at least breifly considered what the impacts of your future efforts may have on their weekends.
+* *seasoned data scientist?*:  Hopefully you're already developing your EDA and model code with pipelines in mind.  Pipeline_gen forces / guides  you  to develop code that can be more easily scaled up by the data engineering team.
+* *seasoned data engineer?* Pipeline_Gen shouldn't be the tool for your production pipelines, but if provided to your data scientists, it will guide them towards producing more deployable and scalable code, making your future self happier :)
+* *full stack data scientist?* (aka data scientist and data engineer) - you can productionalize this under limited situations, and maybe hold you off until your employer can hire a real data engineer. 
 
 ## Design Principles
 0. *Seprate the orchestration from the data processing* Airflow by default expects to run code on the Airflow python itself. It's better to perform all data processing on a docker image designed and built for that purpose.  Airflow's DockerOperator conveniently provides a great pairing of the orchestrator and the pipeline environment.
