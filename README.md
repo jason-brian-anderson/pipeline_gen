@@ -32,6 +32,7 @@ Depends on who you are:
 3. **Keep the orchestrator out of the way** Airflow is an extremely powerful and flexible tool, but it can be daunting to new users who haven't considered the data engineering implications of data science deployemnt.
  4. **Make it as easy as possible to develop in** The application spins up a [local Jupyter Environment](http://localhost:8888/) powered by the pipeline
  5. **Develop with Ops in mind** Allows the developer to watch their pipelines grown from nothing. Use the [local Airflow](http://localhost:8080) to deploy, monitor, and troubleshoot your pipeline from inception
+ 6. **Test-Driven Development? Pipeline-Driven Development!**  Take [software engineering best practices](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882) and apply them to data.
 
 ## Motivation
 Data apps **are** data pipelines. Pipeline_Gen helps data teams start projects with the end in mind.
