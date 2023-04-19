@@ -2,3 +2,9 @@ pillow==9.5.0
 jupyter==1.0.0
 pandas==2.0.0
 scikit-learn==1.2.2
+
+#huggingface
+datasets
+evaluate
+transformers[sentencepiece]
+git-lfs

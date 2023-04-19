@@ -89,3 +89,6 @@ please contact me at jason.anderson.professional [.at.] gmail.com if you want to
 * Adding tools like mypy, linters, and vscode integration by default
 * Add a Dockerfile for a tensorflow container
 * Add example pipelines role modelling best practices
+
+## Passwords
+The usernames/passwords for both airflow and jupyter are all just 'airflow'
