@@ -3,8 +3,10 @@ FROM pytorch/pytorch
 
 RUN apt-get update && \
     apt-get upgrade -y
-
+RUN apt-get install -y git
 
 
 ADD requirements_for_pipeline.txt . 
 RUN pip install -r requirements_for_pipeline.txt
+
+ENV HF_DATASETS_CACHE=/workspace

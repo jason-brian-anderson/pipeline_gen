@@ -328,5 +328,6 @@ services:
 
     volumes:
       - /e/mnt:/mnt/data
+      - /e/notebooks:/workspace
 volumes:
   postgres-db-volume:
