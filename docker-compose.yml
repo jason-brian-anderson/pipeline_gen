@@ -325,9 +325,6 @@ services:
       jt -t monokai -T -N -kl &&
       jupyter lab --ip 0.0.0.0 --LabApp.token='' --no-browser --allow-root
       "
-
-    
-    
     ports:
       - "8888:8888"
     restart: always
@@ -335,9 +332,13 @@ services:
       <<: *airflow-common-depends-on
       airflow-init:
         condition: service_completed_successfully
-
     volumes:
       - /e/mnt:/mnt/data
       - /e/notebooks:/workspace
+    environment:
+      - HF_DATASETS_CACHE=/workspace/.cache
+
+
+
 volumes:
   postgres-db-volume:
