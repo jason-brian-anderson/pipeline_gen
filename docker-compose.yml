@@ -317,7 +317,17 @@ services:
               capabilities: [gpu]
     user: root
     container_name: dockeroperator_deploy_image
-    command: bash -cx "jupyter notebook --ip 0.0.0.0  --NotebookApp.token='airflow' --no-browser --allow-root"
+    #command: bash -cx "jupyter contrib nbextension install --user; jupyter nbextensions_configurator enable --user; jt -t monokai; jupyter notebook --ip 0.0.0.0  --NotebookApp.token='' --no-browser --allow-root;"
+    command: |
+      bash -cx "
+      jupyter contrib nbextension install --user &&
+      jupyter nbextensions_configurator enable --user &&
+      jt -t monokai -T -N -kl &&
+      jupyter lab --ip 0.0.0.0 --LabApp.token='' --no-browser --allow-root
+      "
+
+    
+    
     ports:
       - "8888:8888"
     restart: always

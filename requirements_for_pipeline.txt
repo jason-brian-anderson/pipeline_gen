@@ -1,5 +1,6 @@
 pillow==9.5.0
 jupyter==1.0.0
+jupyterlab
 pandas==2.0.0
 scikit-learn==1.2.2
 python-git
@@ -9,3 +10,9 @@ datasets
 evaluate
 transformers[sentencepiece]
 git-lfs
+
+#jupyterthemes
+jupyter_contrib_nbextensions 
+jupyter_nbextensions_configurator
+jupyterthemes
+voila
