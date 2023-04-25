@@ -306,7 +306,7 @@ services:
         condition: service_completed_successfully
 
   airflow-jupyter:
-    <<: *airflow-common
+
     image: dockeroperator_deploy_image
     deploy:
       resources:
@@ -329,16 +329,13 @@ services:
       - "8888:8888"
     restart: always
     depends_on:
-      <<: *airflow-common-depends-on
       airflow-init:
         condition: service_completed_successfully
     volumes:
-      - /e/mnt:/mnt/data
-      - /e/notebooks:/workspace
+      - ${DATA_MOUNT}:/mnt/data
+      - ${JUPYTER_MOUNT}:/workspace
     environment:
       - HF_DATASETS_CACHE=/workspace/.cache
-
-
 
 volumes:
   postgres-db-volume:
