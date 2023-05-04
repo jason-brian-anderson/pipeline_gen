@@ -16,3 +16,10 @@ jupyter_contrib_nbextensions
 jupyter_nbextensions_configurator
 jupyterthemes
 voila
+
+#don't pin these as they wouldn't be part of any pipelines
+#matplotlib
+seaborn
+
+#misc
+fredapi

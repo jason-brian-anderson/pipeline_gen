@@ -335,7 +335,10 @@ services:
       - ${DATA_MOUNT}:/mnt/data
       - ${JUPYTER_MOUNT}:/workspace
     environment:
-      - HF_DATASETS_CACHE=/workspace/.cache
+      - HF_DATASETS_CACHE:/workspace/.cache
+      - JUPYTER_CONFIG_DIR=/workspace/.jupyter
+      #- TRANSFORMERS_CACHE: /workspace/.cache/huggingface/transformers/
+      #- HF_TOKENIZER_CACHE: .cache/huggingface/tokenizers/
 
 volumes:
   postgres-db-volume:
